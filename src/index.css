@@ -1,0 +1,40 @@
+@import url("./assets/fonts/fonts.css");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.root {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-snap-type: y mandatory;
+}
+h2 {
+  margin: 0;
+  color: black;
+  font-size: 56px;
+  font-weight: 700;
+  font-family: sofia-pro, sans-serif;
+  font-style: normal;
+  letter-spacing: -2px;
+  position: absolute;
+}
+
+section {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  scroll-snap-align: center;
+  perspective: 500px;
+}
+
+section > div {
+  min-height: 80px;
+  position: relative;
+  overflow: hidden;
+}
