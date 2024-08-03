@@ -6,26 +6,6 @@ import DownArrowIcon from "../assets/downArrow.svg";
 import { useEffect, useState } from "react";
 import ThemePointer from "../assets/themepointer.svg";
 
-const AnimatedDotIcon = ({ isVisible }) => (
-  <motion.img
-    src={DotIcon}
-    alt="Dot Icon"
-    initial={{ opacity: isVisible ? 1 : 0 }}
-    animate={{ opacity: isVisible ? 1 : 0 }}
-    transition={{ duration: 0.3 }}
-  />
-);
-
-const AnimatedDownArrowIcon = ({ isVisible }) => (
-  <motion.img
-    src={DownArrowIcon}
-    alt="Down Arrow Icon"
-    initial={{ opacity: isVisible ? 0 : 1 }}
-    animate={{ opacity: isVisible ? 1 : 0 }}
-    transition={{ duration: 0.3 }}
-  />
-);
-
 const Navbar = () => {
   const [isServicesHovered, setIsServicesHovered] = useState(false);
   const [isAboutHovered, setIsAboutHovered] = useState(false);
@@ -44,7 +24,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header className="fixed w-full">
+    <header className="fixed w-full lg:block hidden">
       <nav className="flex justify-between px-6 md:px-52 items-center py-2 border-2">
         <div>
           <img src={logolight} alt="Logo" className="w-max h-[54px]" />
@@ -142,18 +122,20 @@ const Navbar = () => {
               />
             )}
           </div>
-          <div className="lg:relative hidden ">
+          <div className="relative">
             <motion.button
-              className="text-white bg-black rounded-md py-4 px-12 font-satoshi font-black text-[18px] relative overflow-hidden flex items-center justify-center min-w-36 min-h-16"
+              className="text-white bg-black rounded-md py-4 px-12 font-satoshi font-black text-[18px] flex items-center justify-center min-w-36 min-h-16"
               whileHover="hover"
             >
-              <AnimatePresence initial={false}>
+              <AnimatePresence>
                 <motion.span
-                  key="contact"
+                  key="contact1"
                   initial={{ opacity: 1, y: 0 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   variants={{
+                    hidden: { opacity: 0, y: -20 },
+                    visible: { opacity: 1, y: 0 },
                     hover: { opacity: 0, y: -20 },
                   }}
                   transition={{ duration: 0.5 }}
@@ -162,10 +144,12 @@ const Navbar = () => {
                   Contact
                 </motion.span>
                 <motion.span
-                  key="hi"
+                  key="contact2"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 0, y: 20 }}
                   variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: { opacity: 1, y: 0 },
                     hover: { opacity: 1, y: 0 },
                   }}
                   transition={{ duration: 0.5 }}

@@ -2,7 +2,7 @@ import React from "react";
 
 const OurWorks = () => {
   return (
-    <div className="h-screen flex flex-col items-center lg:space-y-8 space-y-30 pl-32 lg:pl-0">
+    <div className="h-screen flex flex-col items-center lg:space-y-8 space-y-30 pl-32 lg:pl-1">
       <div className="lg:pb-20 pb-80">
         <h1 className="text-4xl md:text-7xl h-[30vh] md:h-[50vh] w-[90vw] md:w-[70vw] text-center md:text-left">
           As global leaders in UX UI, technology, and business solutions, we
