@@ -80,7 +80,10 @@ const Banner = ({ setBannerInView }) => {
   }, [controlsBefore, controlsAfter]);
 
   return (
-    <div ref={ref} className="flex w-[100vw] h-[50vh] mx-auto gap-x-12 pt-32">
+    <div
+      ref={ref}
+      className="flex w-[100vw] h-[50vh] mx-auto gap-x-12 pt-32 pb-32"
+    >
       <div className="w-[50%] flex items-center justify-end">
         <motion.img
           src={BannerImageBefore}
