@@ -7,14 +7,14 @@ import AboutUs from "./components/AboutUs";
 import Balls from "./components/Balls";
 import Services from "./components/Services";
 import OurWorks from "./components/OurWorks";
-
+import "./index.css";
 function App() {
   const [bannerInView, setBannerInView] = useState(false);
   const [aboutInView, setAboutInView] = useState(false);
 
   return (
     <>
-      <div className="h-screen mx-auto">
+      <div className="w-screen">
         <Navbar />
         <div className="h-[10vw]"></div>
         <Banner setBannerInView={setBannerInView} />

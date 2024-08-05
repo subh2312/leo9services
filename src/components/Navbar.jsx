@@ -44,7 +44,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header className="fixed w-full">
+    <header className="lg:fixed w-screen">
       <nav className="flex justify-between px-6 md:px-52 items-center py-2 border-2">
         <div>
           <img src={logolight} alt="Logo" className="w-max h-[54px]" />

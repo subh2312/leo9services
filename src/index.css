@@ -4,13 +4,9 @@
 @tailwind components;
 @tailwind utilities;
 
-.root {
-  margin: 0;
-  padding: 0;
-}
-
 html {
   scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
 }
 h2 {
   margin: 0;
@@ -30,11 +26,22 @@ section {
   align-items: center;
   position: relative;
   scroll-snap-align: center;
-  perspective: 500px;
 }
 
 section > div {
   min-height: 80px;
   position: relative;
   overflow: hidden;
+}
+
+:root {
+  width: 100%;
+}
+
+html,
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }

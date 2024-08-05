@@ -7,7 +7,7 @@ import logo5 from "../assets/brandIcons/logo-l-5.svg";
 import logo6 from "../assets/brandIcons/logo-l-6.svg";
 const BrandIcons = () => {
   return (
-    <div className="flex justify-center gap-x-28 mt-36">
+    <div className="flex justify-center gap-x-28 lg:mt-36">
       <div>
         <img src={logo1} alt="logo1" />
       </div>

@@ -17,7 +17,10 @@ const AboutUs = ({ setAboutInView }) => {
   }, [inView, setAboutInView]);
 
   return (
-    <div ref={ref} className="about-section pt-32 h-screen grid grid-rows-2 ">
+    <div
+      ref={ref}
+      className="about-section lg:pt-32 h-screen grid grid-rows-2 "
+    >
       {/* About content */}
       <div className="aboutus-text pr-10 ">
         <motion.div
