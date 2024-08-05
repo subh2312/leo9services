@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useSwipeable } from "react-swipeable";
 import "./App.css";
 
 const App = () => {
   const [scrollStep, setScrollStep] = useState(-1);
   const [lastScrollTime, setLastScrollTime] = useState(0);
-  const [touchStartY, setTouchStartY] = useState(0);
 
   const texts = [
     { title: "Design", subItems: ["UI Design", "UX Design", "Graphic Design"] },
@@ -15,7 +15,7 @@ const App = () => {
 
   const handleScroll = (event) => {
     const now = Date.now();
-    if (now - lastScrollTime < 1500) return; // Debounce time of 200ms
+    if (now - lastScrollTime < 1500) return; // Debounce time of 1500ms
     setLastScrollTime(now);
 
     if (event.deltaY > 0) {
@@ -27,39 +27,30 @@ const App = () => {
     }
   };
 
-  const handleTouchStart = (event) => {
-    setTouchStartY(event.touches[0].clientY);
+  // Swipe handlers
+  const handleSwipeUp = () => {
+    setScrollStep((prev) => Math.min(prev + 1, texts.length - 1));
   };
 
-  const handleTouchMove = (event) => {
-    const touchEndY = event.touches[0].clientY;
-    const now = Date.now();
-    if (now - lastScrollTime < 1500) return; // Debounce time of 200ms
-    setLastScrollTime(now);
-
-    if (touchStartY - touchEndY > 50) {
-      // Swipe up
-      setScrollStep((prev) => Math.min(prev + 1, texts.length - 1));
-    } else if (touchEndY - touchStartY > 50) {
-      // Swipe down
-      setScrollStep((prev) => Math.max(prev - 1, -1));
-    }
+  const handleSwipeDown = () => {
+    setScrollStep((prev) => Math.max(prev - 1, -1));
   };
+
+  // Set up swipeable handlers
+  const swipeHandlers = useSwipeable({
+    onSwipedUp: handleSwipeUp,
+    onSwipedDown: handleSwipeDown,
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true, // Optional: allows mouse swipe tracking
+  });
 
   useEffect(() => {
     window.addEventListener("wheel", handleScroll, { passive: true });
-    window.addEventListener("touchstart", handleTouchStart, { passive: true });
-    window.addEventListener("touchmove", handleTouchMove, { passive: true });
-
-    return () => {
-      window.removeEventListener("wheel", handleScroll);
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchmove", handleTouchMove);
-    };
+    return () => window.removeEventListener("wheel", handleScroll);
   }, [lastScrollTime]);
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center" {...swipeHandlers}>
       <div className="centered-container flex flex-col items-center overflow-x-scroll p-4 md:p-8">
         {texts.map((text, index) => (
           <motion.div
@@ -92,7 +83,7 @@ const App = () => {
                   }`}
                 ></div>
               </motion.div>
-              <h2 className={`text-3xl md:text-7xl`}>{text.title}</h2>
+              <h2 className={`text-3xl md:text-7xl `}>{text.title}</h2>
             </div>
             {scrollStep === index && (
               <div className="flex flex-col gap-4">
