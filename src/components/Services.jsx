@@ -80,7 +80,7 @@ const Images = ({ text, items, img }) => {
   }, [scrollYProgress, controls]);
   return (
     <section className=" lg:pt-32 lg:pl-0 flex flex-col justify-start lg:items-center items-start">
-      <div ref={ref} className="lg:text-7xl sm:text-2xl">
+      <div ref={ref} className="lg:text-7xl sm:text-3xl">
         {text}
       </div>
       {items.map((item) => (
