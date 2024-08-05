@@ -18,7 +18,7 @@ const ServicesOffered = ({ prevRef }) => {
           ></motion.div>
           <b
             ref={ref}
-            className="text-6xl font-satoshi font-black ml-4 mx-auto"
+            className="text-6xl font-satoshi font-black ml-4 mx-auto "
           >
             Design
           </b>

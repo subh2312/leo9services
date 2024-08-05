@@ -44,24 +44,12 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header className="lg:fixed w-screen">
+    <header className="lg:fixed w-[100vw] hidden">
       <nav className="flex justify-between px-6 md:px-52 items-center py-2 border-2">
         <div>
           <img src={logolight} alt="Logo" className="w-max h-[54px]" />
         </div>
-        <div className="md:hidden">
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="text-black"
-          >
-            ☰
-          </button>
-        </div>
-        <div
-          className={`flex-col md:flex-row md:flex justify-between gap-10 items-center ${
-            isMobileMenuOpen ? "flex" : "hidden"
-          } md:flex`}
-        >
+        <div className="flex-col md:flex-row md:flex justify-between gap-10 items-center">
           <div className="font-satoshi font-medium text-[16px]">Work</div>
           <div
             className="font-satoshi font-medium text-[16px] flex p-0 m-0 items-center group"
