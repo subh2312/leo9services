@@ -79,7 +79,7 @@ const Images = ({ text, items, img }) => {
     });
   }, [scrollYProgress, controls]);
   return (
-    <section className=" lg:pt-32 lg:pl-0 flex flex-col justify-start items-start">
+    <section className=" lg:pt-32 lg:pl-0 flex flex-col justify-start lg:items-center items-start">
       <div ref={ref} className="lg:text-7xl sm:text-2xl">
         {text}
       </div>
@@ -90,7 +90,7 @@ const Images = ({ text, items, img }) => {
           exit={{ x: 0, opacity: 0 }}
           transition={{ duration: 0.5 }}
           key={item.id}
-          className="lg:text-4xl text-center sm:text-xl"
+          className="lg:text-4xl sm:text-xl"
         >
           {item.text}
         </motion.div>
