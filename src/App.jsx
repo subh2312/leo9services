@@ -5,6 +5,7 @@ import "./App.css";
 const App = () => {
   const [scrollStep, setScrollStep] = useState(-1);
   const [lastScrollTime, setLastScrollTime] = useState(0);
+  const [touchStartY, setTouchStartY] = useState(0);
 
   const texts = [
     { title: "Design", subItems: ["UI Design", "UX Design", "Graphic Design"] },
@@ -26,9 +27,35 @@ const App = () => {
     }
   };
 
+  const handleTouchStart = (event) => {
+    setTouchStartY(event.touches[0].clientY);
+  };
+
+  const handleTouchMove = (event) => {
+    const touchEndY = event.touches[0].clientY;
+    const now = Date.now();
+    if (now - lastScrollTime < 1500) return; // Debounce time of 200ms
+    setLastScrollTime(now);
+
+    if (touchStartY - touchEndY > 50) {
+      // Swipe up
+      setScrollStep((prev) => Math.min(prev + 1, texts.length - 1));
+    } else if (touchEndY - touchStartY > 50) {
+      // Swipe down
+      setScrollStep((prev) => Math.max(prev - 1, -1));
+    }
+  };
+
   useEffect(() => {
     window.addEventListener("wheel", handleScroll, { passive: true });
-    return () => window.removeEventListener("wheel", handleScroll);
+    window.addEventListener("touchstart", handleTouchStart, { passive: true });
+    window.addEventListener("touchmove", handleTouchMove, { passive: true });
+
+    return () => {
+      window.removeEventListener("wheel", handleScroll);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+    };
   }, [lastScrollTime]);
 
   return (
@@ -36,7 +63,7 @@ const App = () => {
       <div className="centered-container flex flex-col items-center overflow-x-scroll p-4 md:p-8">
         {texts.map((text, index) => (
           <motion.div
-            className=" w-full p-4 md:p-8 mb-4 md:mb-8"
+            className="w-full p-4 md:p-8 mb-4 md:mb-8"
             key={index}
             style={{
               position: "relative",
@@ -65,7 +92,7 @@ const App = () => {
                   }`}
                 ></div>
               </motion.div>
-              <h2 className={`text-3xl md:text-7xl `}>{text.title}</h2>
+              <h2 className={`text-3xl md:text-7xl`}>{text.title}</h2>
             </div>
             {scrollStep === index && (
               <div className="flex flex-col gap-4">
